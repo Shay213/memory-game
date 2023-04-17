@@ -1,1 +1,29 @@
+.App {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.gameContainer {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.3);
+}
+
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-auto-rows: 100px;
+    gap: 10px;
+}
+
+.cardsContainer > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    border-radius: 12px;
+    border: 3px solid #000;
+}

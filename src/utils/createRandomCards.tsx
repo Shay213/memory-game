@@ -9,13 +9,29 @@ enum CardName {
     toucan
 };
   
-type CardNameStrings = keyof typeof CardName;
+export type CardNameStrings = keyof typeof CardName;
 
-class Card{
-    private isClicked = false;
-    private found = false;
+export class Card{
+    #isClicked = false;
+    #found = false;
     constructor(public name: CardNameStrings){
-    this.name = name;
+        this.name = name;
+    }
+
+    set isClicked(value: boolean){
+        this.#isClicked = value;
+    }
+
+    cardFound() {
+        this.#found = true;
+    }
+
+    get isClicked() {
+        return this.#isClicked;
+    }
+
+    get isFound() {
+        return this.#found;
     }
 }
 
@@ -27,11 +43,12 @@ export default (): Card[] => {
     while(cards.length < numOfCards){
         const i = randomNumber(numOfCardName);
         const name = CardName[i] as CardNameStrings;
-        console.log(i);
+        
         if(cards.filter(card => card.name === name).length < 2){
             cards.push(new Card(name));
         }
     }
+    
     return cards;
 };
 

@@ -3,7 +3,8 @@
 :root {
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
   font-weight: 400;
-  background-color: #facc15;
+  --primary-color: #facc15;
+  background-color: var(--primary-color);
 }
 
 body {
