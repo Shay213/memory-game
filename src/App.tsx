@@ -1,32 +1,44 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import createRandomCards from './utils/createRandomCards';
 import { Card as ICard } from './utils/createRandomCards';
 import Card from './components/Card';
+import canClickCard from './utils/canClickCard';
 
 function App() {
   const [cards, setCards] = useState<ICard[]>([]);
+  let isCardInAnimation = useRef<boolean>(false);
 
   useEffect(() => setCards(createRandomCards()), []);
 
   function handleClick(current: HTMLDivElement | null) {
-    const cardsCopy = [...cards];
     const id = current?.id as string;
+
+    if(!canClickCard(cards, id, isCardInAnimation.current)) return;
+    
+    const cardsCopy = [...cards];
     cardsCopy[+id].isClicked = true;
     setCards(cardsCopy);
 
     const updatedCards = [...cardsCopy];
     const cardsClicked = updatedCards.filter(card => card.isClicked);
     if(cardsClicked.length === 2){
-      setTimeout(() => {
         const [card1, card2] = cardsClicked;
+        const setIsClickedToFalse = () => {
+          card1.isClicked = card2.isClicked = false;
+          setCards(updatedCards);
+        };
         if(card1.name === card2.name){
           card1.cardFound();
           card2.cardFound();
+          setIsClickedToFalse();
+        }else{
+          setTimeout(() => {
+            setIsClickedToFalse();
+            isCardInAnimation.current = true;
+            setTimeout(() => isCardInAnimation.current = false,500);
+          },600);
         }
-        card1.isClicked = card2.isClicked = false;
-        setCards(updatedCards);
-      },1000);
     }
   } 
 
