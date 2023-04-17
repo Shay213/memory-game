@@ -13,18 +13,21 @@ function App() {
     const cardsCopy = [...cards];
     const id = current?.id as string;
     cardsCopy[+id].isClicked = true;
-
-    const cardsClicked = cardsCopy.filter(card => card.isClicked);
-    if(cardsClicked.length === 2){
-      const [card1, card2] = cardsClicked;
-      if(card1.name === card2.name){
-        card1.cardFound();
-        card2.cardFound();
-      }else{
-        card1.isClicked = card2.isClicked = false;
-      }
-    }
     setCards(cardsCopy);
+
+    const updatedCards = [...cardsCopy];
+    const cardsClicked = updatedCards.filter(card => card.isClicked);
+    if(cardsClicked.length === 2){
+      setTimeout(() => {
+        const [card1, card2] = cardsClicked;
+        if(card1.name === card2.name){
+          card1.cardFound();
+          card2.cardFound();
+        }
+        card1.isClicked = card2.isClicked = false;
+        setCards(updatedCards);
+      },1000);
+    }
   } 
 
   return (
@@ -34,7 +37,7 @@ function App() {
           {cards.map((card, i) => (
             <Card 
               key={i} 
-              name={card.name}
+              card={card}
               handleClick={handleClick}
               id={i}
             />
