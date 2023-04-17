@@ -7,7 +7,7 @@
 
 .gameContainer {
     background-color: white;
-    padding: 40px;
+    padding: 50px 40px;
     border-radius: 12px;
     box-shadow: 1px 1px 30px rgba(0, 0, 0, 0.3);
 }
@@ -56,4 +56,21 @@
 
 .card > .back {
     transform: rotateY(180deg);
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    margin-top: 40px;
+    font-size: 1.6rem;
+    padding: 10px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: #3d3d3d;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 500ms;
 }
