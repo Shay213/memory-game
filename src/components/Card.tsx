@@ -9,7 +9,7 @@ interface Props{
 }
 
 export default ({card, handleClick, id, isGameFinished}: Props) => {
-    const imgSrc = `${card.name}.svg`;
+    const imgSrc = `/images/${card.name}.svg`;
     const cardRef = useRef<HTMLDivElement>(null);
     const classNames = card.isFound || card.isClicked ? 'card active':'card';
     
